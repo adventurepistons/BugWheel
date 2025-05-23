@@ -29,7 +29,8 @@ saved_tests: Dict[str, List[Dict]] = {}
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 if not OPENAI_API_KEY:
     raise RuntimeError("OPENAI_API_KEY environment variable not set. Please set it in your environment or in a .env file.")
-openai.api_key = OPENAI_API_KEY
+# openai.api_key = OPENAI_API_KEY  # No longer needed for v1 client
+client = openai.OpenAI(api_key=OPENAI_API_KEY)
 # To use: create a .env file with a line: OPENAI_API_KEY=sk-...your-key...
 
 class TestGenerationRequest(BaseModel):
@@ -42,7 +43,8 @@ class TestGenerationResponse(BaseModel):
 def generate_test_cases(aut_id: str = Path(...), req: TestGenerationRequest = ...):
     prompt = LLM_PROMPT_TEMPLATE.format(requirements_text=req.requirements_text)
     try:
-        response = openai.ChatCompletion.create(
+        print("[DEBUG] Sending prompt to OpenAI API...")
+        response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
@@ -51,15 +53,19 @@ def generate_test_cases(aut_id: str = Path(...), req: TestGenerationRequest = ..
             max_tokens=800,
             temperature=0.2,
         )
+        print("[DEBUG] OpenAI API response received.")
         # Extract the JSON from the response
-        content = response.choices[0].message["content"].strip()
+        content = response.choices[0].message.content.strip()
+        print(f"[DEBUG] OpenAI response content: {content}")
         # Find the first and last brackets to extract the JSON array
         start = content.find("[")
         end = content.rfind("]") + 1
         steps_json = content[start:end]
         test_steps = json.loads(steps_json)
+        print("[DEBUG] Parsed test steps from OpenAI response.")
     except Exception as e:
-        # Fallback to dummy steps if OpenAI fails
+        print(f"[ERROR] OpenAI call failed: {e}")
+        print("[DEBUG] Using fallback dummy test steps.")
         test_steps = [
             {
                 "action": "Navigate",
@@ -93,4 +99,5 @@ def generate_test_cases(aut_id: str = Path(...), req: TestGenerationRequest = ..
         "requirements": req.requirements_text,
         "test_steps": test_steps
     })
+    print(f"[DEBUG] Returning {len(test_steps)} test steps to frontend.")
     return TestGenerationResponse(test_steps=test_steps) 

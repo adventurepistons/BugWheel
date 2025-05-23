@@ -23,7 +23,7 @@ Allowed 'action' types and their usage:
 [
   {{
     "action": "(Navigate|Type|Click|Check|Select|AssertText|AssertElementPresent|WaitForElement)",
-    "element_description": "<concise description of the UI element, e.g., 'Login button', 'Username input field', 'Dashboard page header', 'Terms and Conditions checkbox'>",
+    "element_description": "<concise description of the UI element, e.g., 'Login button', 'Username input field', 'Dashboard page header', 'Terms and Conditions checkbox','email input field'>",
     "value": "<value to type/select, if applicable, or URL for Navigate>",
     "expected_result": "<clear and verifiable outcome of the step, what should be seen/happen>"
   }}
