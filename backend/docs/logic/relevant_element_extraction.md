@@ -144,4 +144,32 @@ Allowed 'action' types:
 - Start with **Keyword Matching** for your MVP.
 - As your ApplicationModel grows, consider **Semantic Search** for better accuracy.
 - Combine with **Heuristic Filtering** for domain-specific rules.
-- Update this doc as your extraction logic evolves! 
+- Update this doc as your extraction logic evolves!
+
+---
+
+## Privacy-First Workflow for PII Masking and Test Automation
+
+The following diagram illustrates the privacy-first workflow for extracting, masking, and processing UI elements for LLM-driven test automation. This approach ensures 100% masking of all PII on the user's machine, with only placeholder-masked data ever leaving the local environment. The real value-to-placeholder mapping is securely stored locally, enabling remapping for test execution without exposing PII to the cloud or LLM.
+
+```mermaid
+graph TD
+    A[Scan UI Elements on User Machine] --> B{Detect PII in Elements}
+    B -->|PII Found| C[Replace PII with Deterministic Placeholders (e.g., EMAIL_1)]
+    C --> D[Store Mapping (PII <-> Placeholder) Locally (Encrypted)]
+    C --> E[Build Masked Application Map]
+    E --> F[Store Masked Map in Cloud Backend (Optional)]
+    E --> G[Send Masked Elements/Descriptions to LLM]
+    G --> H[LLM Returns Test Step Mappings (Placeholders Only)]
+    H --> I[Generate Playwright/Test Script (Placeholders Only)]
+    I --> J[Remap Placeholders to Real Values Locally]
+    J --> K[Execute Test Locally with Real Data]
+```
+
+**Key Points:**
+- All PII detection and masking occurs locally.
+- Only masked data (with placeholders) is sent to the cloud or LLM.
+- The mapping between real values and placeholders is never exposed outside the user's machine.
+- Test execution with real data happens locally after remapping.
+
+This workflow enables secure, privacy-first test automation and is fully compatible with cloud storage and LLM-driven test generation, without any risk of PII exposure. 

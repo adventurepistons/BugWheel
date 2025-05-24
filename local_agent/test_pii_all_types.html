@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PII Masking Test - All Types (Realistic)</title>
+</head>
+<body>
+    <h1>PII Masking Test - All Types (Realistic)</h1>
+    <form>
+        <label for="email">Email</label>
+        <input id="email" name="email" value="nik@abc.com"><br>
+        <label for="phone">Phone</label>
+        <input id="phone" name="phone" value="+1-555-123-4567"><br>
+        <label for="name">Name</label>
+        <input id="name" name="name" value="John Doe"><br>
+        <label for="address">Address</label>
+        <input id="address" name="address" value="123 Main St, Springfield, IL 62704"><br>
+        <label for="ssn">SSN</label>
+        <input id="ssn" name="ssn" value="123-45-6789"><br>
+        <label for="credit_card">Credit Card</label>
+        <input id="credit_card" name="credit_card" value="4111 1111 1111 1111"><br>
+        <label for="passport">Passport</label>
+        <input id="passport" name="passport" value="X1234567"><br>
+        <label for="aadhaar">Aadhaar</label>
+        <input id="aadhaar" name="aadhaar" value="1234-5678-9012"><br>
+        <label for="pan">PAN</label>
+        <input id="pan" name="pan" value="ABCDE1234F"><br>
+        <label for="organization">Organization</label>
+        <input id="organization" name="organization" value="Acme Corp"><br>
+        <label for="uploaded_file">Uploaded File</label>
+        <input id="uploaded_file" name="uploaded_file" value="resume.pdf"><br>
+        <label for="session_id">Session ID</label>
+        <input id="session_id" name="session_id" value="abcdef1234567890"><br>
+        <label for="api_key">API Key</label>
+        <input id="api_key" name="api_key" value="sk-abcdefg1234567890"><br>
+        <label for="access_token">Access Token</label>
+        <input id="access_token" name="access_token" value="ya29.a0AfH6SMBEXAMPLE"><br>
+        <label for="customer_legacy_id">Customer Legacy ID</label>
+        <input id="customer_legacy_id" name="customer_legacy_id" value="CUST-0001-LEGACY"><br>
+        <button type="submit">Submit</button>
+    </form>
+    <h2>PII Table</h2>
+    <table border="1">
+        <tr><th>Label</th><th>Value</th></tr>
+        <tr><td>Email</td><td>nik@abc.com</td></tr>
+        <tr><td>Phone</td><td>+1-555-123-4567</td></tr>
+        <tr><td>Name</td><td>John Doe</td></tr>
+        <tr><td>Address</td><td>123 Main St, Springfield, IL 62704</td></tr>
+        <tr><td>SSN</td><td>123-45-6789</td></tr>
+        <tr><td>Credit Card</td><td>4111 1111 1111 1111</td></tr>
+        <tr><td>Passport</td><td>X1234567</td></tr>
+        <tr><td>Aadhaar</td><td>1234-5678-9012</td></tr>
+        <tr><td>PAN</td><td>ABCDE1234F</td></tr>
+        <tr><td>Organization</td><td>Acme Corp</td></tr>
+        <tr><td>Uploaded File</td><td>resume.pdf</td></tr>
+        <tr><td>Session ID</td><td>abcdef1234567890</td></tr>
+        <tr><td>API Key</td><td>sk-abcdefg1234567890</td></tr>
+        <tr><td>Access Token</td><td>ya29.a0AfH6SMBEXAMPLE</td></tr>
+        <tr><td>Customer Legacy ID</td><td>CUST-0001-LEGACY</td></tr>
+    </table>
+    <h2>PII in Spans</h2>
+    <span id="span_email">nik@abc.com</span>
+    <span id="span_phone">+1-555-123-4567</span>
+    <span id="span_name">John Doe</span>
+    <span id="span_address">123 Main St, Springfield, IL 62704</span>
+    <span id="span_ssn">123-45-6789</span>
+    <span id="span_credit_card">4111 1111 1111 1111</span>
+    <span id="span_passport">X1234567</span>
+    <span id="span_aadhaar">1234-5678-9012</span>
+    <span id="span_pan">ABCDE1234F</span>
+    <span id="span_organization">Acme Corp</span>
+    <span id="span_uploaded_file">resume.pdf</span>
+    <span id="span_session_id">abcdef1234567890</span>
+    <span id="span_api_key">sk-abcdefg1234567890</span>
+    <span id="span_access_token">ya29.a0AfH6SMBEXAMPLE</span>
+    <span id="span_customer_legacy_id">CUST-0001-LEGACY</span>
+</body>
+</html> 

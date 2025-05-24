@@ -7,6 +7,7 @@ import json
 from llm_prompts import LLM_PROMPT_TEMPLATE
 from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 
 # Load environment variables from .env file if present
 load_dotenv()
@@ -100,4 +101,16 @@ def generate_test_cases(aut_id: str = Path(...), req: TestGenerationRequest = ..
         "test_steps": test_steps
     })
     print(f"[DEBUG] Returning {len(test_steps)} test steps to frontend.")
-    return TestGenerationResponse(test_steps=test_steps) 
+    return TestGenerationResponse(test_steps=test_steps)
+
+DSL_DIR = os.path.join(os.path.dirname(__file__), 'dsl')
+PLACEHOLDER_FILE = os.path.join(DSL_DIR, 'placeholders.json')
+SCHEMA_FILE = os.path.join(DSL_DIR, 'placeholders.schema.json')
+
+@app.get("/api/dsl/placeholders/latest")
+def get_placeholders():
+    return FileResponse(PLACEHOLDER_FILE, media_type="application/json")
+
+@app.get("/api/dsl/placeholders/schema")
+def get_placeholder_schema():
+    return FileResponse(SCHEMA_FILE, media_type="application/json") 

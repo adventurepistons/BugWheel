@@ -1,0 +1,613 @@
+{
+  "dsl_version": "2.0.0",
+  "placeholders": {
+    "EMAIL": {
+      "type": "string",
+      "format": "email",
+      "category": "contact_information",
+      "jurisdiction": ["GLOBAL", "GDPR", "CCPA", "PIPEDA"],
+      "security_level": "high",
+      "sensitivity_score": 7,
+      "regulatory_scope": ["GDPR", "CCPA"],
+      "data_classification": "personal_identifier",
+      "retention_category": "standard",
+      "geographic_restrictions": [],
+      "cross_border_restrictions": true,
+      "anonymization_method": "hash",
+      "description": "Email address placeholder",
+      "examples": ["user@example.com"],
+      "validation_pattern": "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$",
+      "related_placeholders": ["USERNAME", "CONTACT_INFO"],
+      "compliance_notes": "Requires explicit consent under GDPR Article 6",
+      "masking_method_hint": "regex_only",
+      "faker_provider": "email",
+      "is_detectable": true
+    },
+    "PASSWORD": {
+      "type": "string",
+      "minLength": 8,
+      "description": "Password",
+      "category": "authentication",
+      "security_level": "pii"
+    },
+    "PHONE_NUMBER": {
+      "type": "string",
+      "format": "phone",
+      "description": "Phone number",
+      "category": "contact",
+      "security_level": "pii"
+    },
+    "NAME": {
+      "type": "string",
+      "description": "Full name",
+      "category": "identity",
+      "security_level": "pii"
+    },
+    "FIRST_NAME": {
+      "type": "string",
+      "description": "First name",
+      "category": "identity",
+      "security_level": "pii"
+    },
+    "LAST_NAME": {
+      "type": "string",
+      "description": "Last name",
+      "category": "identity",
+      "security_level": "pii"
+    },
+    "MIDDLE_NAME": {
+      "type": "string",
+      "description": "Middle name",
+      "category": "identity",
+      "security_level": "pii"
+    },
+    "MAIDEN_NAME": {
+      "type": "string",
+      "description": "Maiden name",
+      "category": "identity",
+      "security_level": "pii"
+    },
+    "USERNAME": {
+      "type": "string",
+      "description": "Username or user ID",
+      "category": "authentication",
+      "security_level": "pii"
+    },
+    "ADDRESS": {
+      "type": "string",
+      "description": "Street address",
+      "category": "contact",
+      "security_level": "pii"
+    },
+    "CITY": {
+      "type": "string",
+      "description": "City",
+      "category": "contact",
+      "security_level": "pii"
+    },
+    "STATE": {
+      "type": "string",
+      "description": "State or province",
+      "category": "contact",
+      "security_level": "pii"
+    },
+    "POSTAL_CODE": {
+      "type": "string",
+      "description": "Postal or ZIP code",
+      "category": "contact",
+      "security_level": "pii"
+    },
+    "COUNTRY": {
+      "type": "string",
+      "description": "Country",
+      "category": "contact",
+      "security_level": "pii"
+    },
+    "DATE_OF_BIRTH": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of birth",
+      "category": "demographic",
+      "security_level": "pii"
+    },
+    "AGE": {
+      "type": "string",
+      "description": "Age",
+      "category": "demographic",
+      "security_level": "pii"
+    },
+    "GENDER": {
+      "type": "string",
+      "description": "Gender",
+      "category": "demographic",
+      "security_level": "pii"
+    },
+    "RACE": {
+      "type": "string",
+      "description": "Race or ethnicity",
+      "category": "demographic",
+      "security_level": "pii"
+    },
+    "MARITAL_STATUS": {
+      "type": "string",
+      "description": "Marital status",
+      "category": "demographic",
+      "security_level": "pii"
+    },
+    "SSN": {
+      "type": "string",
+      "description": "Social Security Number",
+      "category": "government",
+      "security_level": "pii"
+    },
+    "PASSPORT_NUMBER": {
+      "type": "string",
+      "description": "Passport number",
+      "category": "government",
+      "security_level": "pii"
+    },
+    "DRIVER_LICENSE": {
+      "type": "string",
+      "description": "Driver's license number",
+      "category": "government",
+      "security_level": "pii"
+    },
+    "NATIONAL_ID": {
+      "type": "string",
+      "description": "National identification number",
+      "category": "government",
+      "security_level": "pii"
+    },
+    "TAX_ID": {
+      "type": "string",
+      "description": "Tax identification number",
+      "category": "government",
+      "security_level": "pii"
+    },
+    "CREDIT_CARD": {
+      "type": "string",
+      "description": "Credit card number",
+      "category": "financial",
+      "security_level": "pii"
+    },
+    "CREDIT_CARD_CVV": {
+      "type": "string",
+      "description": "Credit card CVV",
+      "category": "financial",
+      "security_level": "pii"
+    },
+    "BANK_ACCOUNT": {
+      "type": "string",
+      "description": "Bank account number",
+      "category": "financial",
+      "security_level": "pii"
+    },
+    "BANK_ROUTING": {
+      "type": "string",
+      "description": "Bank routing number",
+      "category": "financial",
+      "security_level": "pii"
+    },
+    "HEALTH_PLAN_BENEFICIARY": {
+      "type": "string",
+      "description": "Health plan beneficiary number",
+      "category": "health",
+      "security_level": "pii"
+    },
+    "MEDICAL_RECORD": {
+      "type": "string",
+      "description": "Medical record number",
+      "category": "health",
+      "security_level": "pii"
+    },
+    "HEALTHCARE_PROVIDER": {
+      "type": "string",
+      "description": "Healthcare provider name or ID",
+      "category": "health",
+      "security_level": "pii"
+    },
+    "DIAGNOSIS": {
+      "type": "string",
+      "description": "Medical diagnosis",
+      "category": "health",
+      "security_level": "pii"
+    },
+    "PRESCRIPTION": {
+      "type": "string",
+      "description": "Prescription information",
+      "category": "health",
+      "security_level": "pii"
+    },
+    "BIOMETRIC_FINGERPRINT": {
+      "type": "string",
+      "description": "Fingerprint data",
+      "category": "biometric",
+      "security_level": "pii"
+    },
+    "BIOMETRIC_FACE": {
+      "type": "string",
+      "description": "Facial recognition data",
+      "category": "biometric",
+      "security_level": "pii"
+    },
+    "BIOMETRIC_VOICE": {
+      "type": "string",
+      "description": "Voiceprint data",
+      "category": "biometric",
+      "security_level": "pii"
+    },
+    "BIOMETRIC_IRIS": {
+      "type": "string",
+      "description": "Iris scan data",
+      "category": "biometric",
+      "security_level": "pii"
+    },
+    "BIOMETRIC_DNA": {
+      "type": "string",
+      "description": "DNA sequence data",
+      "category": "biometric",
+      "security_level": "pii"
+    },
+    "IP_ADDRESS": {
+      "type": "string",
+      "format": "ipv4",
+      "description": "IP address",
+      "category": "online",
+      "security_level": "pii"
+    },
+    "MAC_ADDRESS": {
+      "type": "string",
+      "format": "mac",
+      "description": "MAC address",
+      "category": "online",
+      "security_level": "pii"
+    },
+    "DEVICE_ID": {
+      "type": "string",
+      "description": "Device identifier",
+      "category": "online",
+      "security_level": "pii"
+    },
+    "COOKIE": {
+      "type": "string",
+      "description": "Web cookie or session ID",
+      "category": "online",
+      "security_level": "pii"
+    },
+    "USER_ID": {
+      "type": "string",
+      "description": "User identifier",
+      "category": "online",
+      "security_level": "pii"
+    },
+    "ACCOUNT_NUMBER": {
+      "type": "string",
+      "description": "Account number",
+      "category": "financial",
+      "security_level": "pii"
+    },
+    "EMPLOYEE_ID": {
+      "type": "string",
+      "description": "Employee ID",
+      "category": "employment",
+      "security_level": "pii"
+    },
+    "STUDENT_ID": {
+      "type": "string",
+      "category": "education",
+      "jurisdiction": ["GLOBAL"],
+      "security_level": "medium",
+      "description": "Student identifier",
+      "is_detectable": true
+    },
+    "SCHOOL": {
+      "type": "string",
+      "description": "School name",
+      "category": "education",
+      "security_level": "pii"
+    },
+    "EMPLOYER": {
+      "type": "string",
+      "description": "Employer name",
+      "category": "employment",
+      "security_level": "pii"
+    },
+    "JOB_TITLE": {
+      "type": "string",
+      "description": "Job title",
+      "category": "employment",
+      "security_level": "pii"
+    },
+    "GEOLOCATION": {
+      "type": "string",
+      "description": "Geolocation (GPS coordinates)",
+      "category": "location",
+      "security_level": "pii"
+    },
+    "URL": {
+      "type": "string",
+      "description": "URL or web address",
+      "category": "online",
+      "security_level": "pii"
+    },
+    "AADHAAR_NUMBER": {
+      "type": "string",
+      "format": "12-digit",
+      "category": "government_id",
+      "jurisdiction": ["IN"],
+      "security_level": "very_high",
+      "sensitivity_score": 10,
+      "regulatory_scope": ["DPDPA"],
+      "data_classification": "national_identifier",
+      "retention_category": "restricted",
+      "geographic_restrictions": ["IN"],
+      "cross_border_restrictions": true,
+      "anonymization_method": "tokenization",
+      "description": "Aadhaar number (India national ID)",
+      "examples": ["1234-5678-9012"],
+      "validation_pattern": "^\\d{4}-\\d{4}-\\d{4}$",
+      "related_placeholders": ["PAN_NUMBER"],
+      "compliance_notes": "Masking required under Indian privacy law",
+      "masking_method_hint": "regex_only",
+      "faker_provider": "aadhaar",
+      "is_detectable": true
+    },
+    "PAN_NUMBER": {
+      "type": "string",
+      "description": "Permanent Account Number (PAN, India tax ID)",
+      "category": "government",
+      "security_level": "pii"
+    },
+    "VOTER_ID": {
+      "type": "string",
+      "description": "Voter ID (India)",
+      "category": "government",
+      "security_level": "pii"
+    },
+    "RATION_CARD_NUMBER": {
+      "type": "string",
+      "description": "Ration card number (India)",
+      "category": "government",
+      "security_level": "pii"
+    },
+    "EPF_NUMBER": {
+      "type": "string",
+      "description": "Employee Provident Fund number (India)",
+      "category": "employment",
+      "security_level": "pii"
+    },
+    "GSTIN": {
+      "type": "string",
+      "description": "Goods and Services Tax Identification Number (India)",
+      "category": "business",
+      "security_level": "pii"
+    },
+    "CASTE_CERTIFICATE_NUMBER": {
+      "type": "string",
+      "description": "Caste/Tribe certificate number (India)",
+      "category": "government",
+      "security_level": "pii"
+    },
+    "BIRTH_CERTIFICATE_NUMBER": {
+      "type": "string",
+      "description": "Birth certificate number",
+      "category": "government",
+      "security_level": "pii"
+    },
+    "MARRIAGE_CERTIFICATE_NUMBER": {
+      "type": "string",
+      "description": "Marriage certificate number",
+      "category": "government",
+      "security_level": "pii"
+    },
+    "INSURANCE_POLICY_NUMBER": {
+      "type": "string",
+      "description": "Insurance policy number",
+      "category": "financial",
+      "security_level": "pii"
+    },
+    "VEHICLE_REGISTRATION_NUMBER": {
+      "type": "string",
+      "description": "Vehicle registration number",
+      "category": "government",
+      "security_level": "pii"
+    },
+    "DNA_SEQUENCE": {
+      "type": "string",
+      "category": "genetic_data",
+      "jurisdiction": ["GLOBAL", "GDPR"],
+      "security_level": "very_high",
+      "sensitivity_score": 10,
+      "regulatory_scope": ["GDPR"],
+      "data_classification": "biometric",
+      "retention_category": "restricted",
+      "description": "Genetic sequencing data",
+      "examples": ["ATCGGCTA..."],
+      "is_detectable": false,
+      "notes": "Requires advanced NLP/ML for detection"
+    },
+    "BLOCKCHAIN_ADDRESS": {
+      "type": "string",
+      "category": "digital_identity",
+      "jurisdiction": ["GLOBAL"],
+      "security_level": "medium",
+      "description": "Cryptocurrency wallet address",
+      "examples": ["0x123abc...", "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"],
+      "is_detectable": true
+    },
+    "INSEE_NUMBER": {
+      "type": "string",
+      "category": "government_id",
+      "jurisdiction": ["FR", "EU"],
+      "security_level": "high",
+      "description": "France national identifier",
+      "examples": ["2 86 12 75 123 456 78"],
+      "is_detectable": true
+    },
+    "HEALTH_PLAN_ID": {
+      "type": "string",
+      "category": "health",
+      "jurisdiction": ["US", "EU"],
+      "security_level": "high",
+      "description": "Health insurance plan identifier",
+      "examples": ["H123456789"],
+      "is_detectable": true
+    },
+    "SEXUAL_ORIENTATION": {
+      "type": "string",
+      "category": "sensitive_demographic",
+      "jurisdiction": ["GLOBAL", "GDPR"],
+      "security_level": "very_high",
+      "description": "Sexual orientation",
+      "is_detectable": false,
+      "notes": "Requires advanced NLP/ML for detection"
+    },
+    "CRIMINAL_RECORD_DETAILS": {
+      "type": "string",
+      "category": "legal",
+      "jurisdiction": ["GLOBAL", "GDPR"],
+      "security_level": "very_high",
+      "description": "Criminal convictions and offences",
+      "is_detectable": false
+    },
+    "PATIENT_ID": {
+      "type": "string",
+      "category": "health",
+      "jurisdiction": ["US", "EU"],
+      "security_level": "high",
+      "description": "Internal hospital patient ID",
+      "is_detectable": true
+    },
+    "WIFI_BSSID": {
+      "type": "string",
+      "category": "location",
+      "jurisdiction": ["GLOBAL"],
+      "security_level": "medium",
+      "description": "WiFi BSSID (MAC address)",
+      "is_detectable": true
+    },
+    "CPF_NUMBER_BR": {
+      "type": "string",
+      "category": "government_id",
+      "jurisdiction": ["BR"],
+      "security_level": "high",
+      "description": "Brazilian individual taxpayer number",
+      "examples": ["123.456.789-09"],
+      "is_detectable": true
+    },
+    "MY_NUMBER_JP": {
+      "type": "string",
+      "category": "government_id",
+      "jurisdiction": ["JP"],
+      "security_level": "high",
+      "description": "Japan individual number",
+      "examples": ["1234-5678-9012"],
+      "is_detectable": true
+    },
+    "SNILS_RU": {
+      "type": "string",
+      "category": "government_id",
+      "jurisdiction": ["RU"],
+      "security_level": "high",
+      "description": "Russian pension insurance number",
+      "examples": ["123-456-789 00"],
+      "is_detectable": true
+    },
+    "CRYPTO_WALLET_ADDRESS": {
+      "type": "string",
+      "category": "financial",
+      "jurisdiction": ["GLOBAL"],
+      "security_level": "medium",
+      "description": "Cryptocurrency wallet address",
+      "is_detectable": true
+    },
+    "DEVICE_UUID": {
+      "type": "string",
+      "category": "iot",
+      "jurisdiction": ["GLOBAL"],
+      "security_level": "medium",
+      "description": "Unique device identifier",
+      "is_detectable": true
+    },
+    "LIBRARY_CARD": {
+      "type": "string",
+      "category": "education",
+      "jurisdiction": ["GLOBAL"],
+      "security_level": "low",
+      "description": "Library membership number",
+      "is_detectable": true
+    },
+    "PERMIT_NUMBER": {
+      "type": "string",
+      "category": "legal",
+      "jurisdiction": ["GLOBAL"],
+      "security_level": "medium",
+      "description": "Permit number",
+      "is_detectable": true
+    },
+    "MODEL_OUTPUT": {
+      "type": "string",
+      "category": "ai_ml",
+      "jurisdiction": ["GLOBAL"],
+      "security_level": "medium",
+      "description": "AI-generated content linked to individuals",
+      "is_detectable": false
+    },
+    "ORGANIZATION_NAME": {
+      "type": "string",
+      "category": "organization",
+      "jurisdiction": ["GLOBAL"],
+      "security_level": "medium",
+      "description": "Organization or company name (contextually PII if unique)",
+      "is_detectable": true
+    },
+    "UPLOADED_FILE": {
+      "type": "string",
+      "category": "file",
+      "jurisdiction": ["GLOBAL"],
+      "security_level": "high",
+      "description": "User-uploaded file (may contain PII)",
+      "is_detectable": false
+    },
+    "FILE_METADATA": {
+      "type": "string",
+      "category": "file",
+      "jurisdiction": ["GLOBAL"],
+      "security_level": "medium",
+      "description": "Metadata from uploaded files (e.g., EXIF, PDF properties)",
+      "is_detectable": false
+    },
+    "SESSION_ID": {
+      "type": "string",
+      "category": "sensitive_token",
+      "jurisdiction": ["GLOBAL"],
+      "security_level": "high",
+      "description": "Session identifier (may be sensitive/regulated)",
+      "is_detectable": true
+    },
+    "API_KEY": {
+      "type": "string",
+      "category": "sensitive_token",
+      "jurisdiction": ["GLOBAL"],
+      "security_level": "high",
+      "description": "API key or secret (may be sensitive/regulated)",
+      "is_detectable": true
+    },
+    "ACCESS_TOKEN": {
+      "type": "string",
+      "category": "sensitive_token",
+      "jurisdiction": ["GLOBAL"],
+      "security_level": "high",
+      "description": "Access or refresh token (may be sensitive/regulated)",
+      "is_detectable": true
+    },
+    "CUSTOMER_LEGACY_ID": {
+      "type": "string",
+      "category": "custom_id",
+      "jurisdiction": ["GLOBAL"],
+      "security_level": "medium",
+      "description": "Internal or legacy customer/account identifier (contextually PII)",
+      "is_detectable": false
+    }
+  }
+} 

@@ -33,7 +33,7 @@ LOCATOR_SCORES = {
     'xpath': 30,
 }
 
-nlp = spacy.load("en_core_web_lg")
+nlp = spacy.load("en_core_web_sm")
 
 def is_unstable_class(cls):
     """Penalize classes that look auto-generated."""
@@ -173,15 +173,17 @@ def generate_description(el):
     if tag == "button":
         return f"{label} button" if label else "Button"
     if tag == "input":
-        if "password" in label.lower():
+        label_str = label or ""
+        if isinstance(label_str, str) and "password" in label_str.lower():
             return "Password input field"
-        if "email" in label.lower():
+        if isinstance(label_str, str) and "email" in label_str.lower():
             return "Email input field"
-        if "user" in label.lower():
+        if isinstance(label_str, str) and "user" in label_str.lower():
             return "Username input field"
         return f"{label} input field" if label else "Input field"
     if tag == "select":
-        if "country" in label.lower():
+        label_str = label or ""
+        if isinstance(label_str, str) and "country" in label_str.lower():
             return "Country selection dropdown"
         return f"{label} dropdown" if label else "Dropdown"
     return f"{label} {tag}".strip() if label else tag.capitalize()

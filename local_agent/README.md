@@ -192,5 +192,44 @@ By default, the local agent **does not extract the `value` attribute** for any e
 
 See the code and comments in `playwright_utils.py` for details.
 
+## Privacy-First PII Masking Strategy (2024+)
+
+### Overview
+The local agent implements a privacy-first approach to PII (Personally Identifiable Information) masking, ensuring that no real or fake PII ever leaves the user's machine. All sensitive data is abstracted using deterministic placeholders, and the mapping between real values and placeholders is stored locally in an encrypted format. This architecture guarantees zero PII exposure to the cloud, backend, or LLM, while enabling robust test automation and compliance.
+
+### Key Principles
+- **100% Local Masking:** All PII detection and masking is performed on the user's machine before any data is sent to the cloud or LLM.
+- **Deterministic Placeholders:** Each unique PII value is replaced with a session-scoped, deterministic placeholder (e.g., `[EMAIL_1]`, `[NAME_2]`).
+- **Local Mapping Storage:** The mapping between real PII values and placeholders is stored locally in an encrypted file, never transmitted or exposed externally.
+- **Zero PII to Cloud/LLM:** Only masked data (with placeholders) is sent to the cloud backend or LLM for test step matching and script generation.
+- **Remapping for Execution:** Before test execution, placeholders are remapped to real values locally, ensuring that real data is only used on the user's machine.
+
+### Workflow Diagram
+The following summarizes the privacy-first workflow:
+
+```mermaid
+graph TD
+    A[Scan UI Elements on User Machine] --> B{Detect PII in Elements}
+    B -->|PII Found| C[Replace PII with Deterministic Placeholders (e.g., EMAIL_1)]
+    C --> D[Store Mapping (PII <-> Placeholder) Locally (Encrypted)]
+    C --> E[Build Masked Application Map]
+    E --> F[Store Masked Map in Cloud Backend (Optional)]
+    E --> G[Send Masked Elements/Descriptions to LLM]
+    G --> H[LLM Returns Test Step Mappings (Placeholders Only)]
+    H --> I[Generate Playwright/Test Script (Placeholders Only)]
+    I --> J[Remap Placeholders to Real Values Locally]
+    J --> K[Execute Test Locally with Real Data]
+```
+
+### Compliance & Auditability
+- **Audit Trail:** All masking and remapping actions are logged locally for compliance and debugging.
+- **No PII Leakage:** The architecture is designed to meet and exceed regulatory requirements (GDPR, HIPAA, etc.) by ensuring no PII is ever exposed to third parties.
+- **Extensible:** The placeholder registry and masking logic can be updated to cover new PII types and compliance needs.
+
+### Benefits
+- **Maximum Privacy:** No real or fake PII ever leaves the user's environment.
+- **Enterprise-Ready:** Suitable for highly regulated industries (healthcare, finance, government).
+- **Future-Proof:** Aligned with emerging privacy standards and zero-trust architectures.
+
 ---
 *Update this file as new features are added or changed.* 

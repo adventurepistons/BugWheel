@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PII Placeholder Registry",
+  "type": "object",
+  "properties": {
+    "dsl_version": { "type": "string" },
+    "placeholders": {
+      "type": "object",
+      "patternProperties": {
+        "^[A-Z0-9_\[\]:]+$": {
+          "type": "object",
+          "properties": {
+            "type": { "type": "string" },
+            "format": { "type": "string" },
+            "category": { "type": "string" },
+            "jurisdiction": { "type": "array", "items": { "type": "string" } },
+            "industry": { "type": "array", "items": { "type": "string" } },
+            "security_level": { "type": "string" },
+            "sensitivity_score": { "type": "integer" },
+            "regulatory_scope": { "type": "array", "items": { "type": "string" } },
+            "data_classification": { "type": "string" },
+            "retention_category": { "type": "string" },
+            "geographic_restrictions": { "type": "array", "items": { "type": "string" } },
+            "cross_border_restrictions": { "type": "boolean" },
+            "anonymization_method": { "type": "string" },
+            "description": { "type": "string" },
+            "examples": { "type": "array", "items": { "type": "string" } },
+            "validation_pattern": { "type": "string" },
+            "related_placeholders": { "type": "array", "items": { "type": "string" } },
+            "compliance_notes": { "type": "string" },
+            "masking_method_hint": { "type": "string" },
+            "faker_provider": { "type": "string" },
+            "regex_pattern": { "type": "string" },
+            "is_detectable": { "type": "boolean" },
+            "notes": { "type": "string" }
+          },
+          "required": ["type", "description", "category", "security_level"]
+        }
+      }
+    }
+  },
+  "required": ["dsl_version", "placeholders"]
+} 

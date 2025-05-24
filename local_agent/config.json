@@ -1,6 +1,6 @@
 {
   "aut_id": "demo-app",
-  "base_url": "https://demowebshop.tricentis.com",
+  "base_url": "https://demowebshop.tricentis.com/",
   "scan_flows": [
     {
       "name": "public",
@@ -19,7 +19,7 @@
     }
   ],
   "scan": {
-    "max_pages": 10,
+    "max_pages": 2,
     "concurrency": 2,
     "include_patterns": [],
     "exclude_patterns": ["/logout", "/admin"]

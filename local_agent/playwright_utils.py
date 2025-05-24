@@ -43,7 +43,7 @@ async def perform_login(page, login_details):
 
 async def get_css_selector(handle):
     """Generate a CSS selector for the element using id, class, attributes, nth-child, etc."""
-    selector = await handle.evaluate('''el => {
+    selector = await handle.evaluate(r'''el => {
         if (el.id) return `#${el.id}`;
         if (el.className && typeof el.className === "string") {
             const classes = el.className.split(/\s+/).filter(Boolean);
@@ -123,7 +123,8 @@ async def extract_elements(page):
     raw_elements = []
     for handle in handles:
         try:
-            tag_name = (await handle.evaluate("el => el.tagName")).lower()
+            tag_name = await handle.evaluate("el => el.tagName")
+            tag_name = tag_name.lower() if tag_name else ""
             attributes = await handle.evaluate("el => Object.fromEntries(Array.from(el.attributes).map(a => [a.name, a.value]))")
             # Remove 'value' from attributes for all elements
             attributes.pop("value", None)
